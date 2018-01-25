@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.TimeRankIndexInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.TimeRankIndexInfo" >
+    <id column="update_id" property="updateId" jdbcType="CHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    update_id, update_time, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from time_rank_index
+    where update_id = #{updateId,jdbcType=CHAR}
+  </select>
+  <select id="selectByMaxPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from time_rank_index
+    where update_id = (select MAX(update_id) from time_rank_index )
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from time_rank_index
+    where update_id = #{updateId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.TimeRankIndexInfo" >
+    insert into time_rank_index (update_id, update_time, description
+      )
+    values (#{updateId,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.TimeRankIndexInfo" >
+    insert into time_rank_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="updateId != null" >
+        #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.TimeRankIndexInfo" >
+    update time_rank_index
+    <set >
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where update_id = #{updateId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.TimeRankIndexInfo" >
+    update time_rank_index
+    set update_time = #{updateTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR}
+    where update_id = #{updateId,jdbcType=CHAR}
+  </update>
+</mapper>

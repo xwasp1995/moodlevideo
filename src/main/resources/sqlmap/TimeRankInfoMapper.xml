@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.TimeRankInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.TimeRankInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="update_id" property="updateId" jdbcType="CHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="totaltime" property="totaltime" jdbcType="TIME" />
+    <result column="rank" property="rank" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, update_id, name, totaltime, rank, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from time_rank
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUpdateId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from time_rank
+    where update_id = #{updateId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from time_rank
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.TimeRankInfo" >
+    insert into time_rank (id, userid, update_id, 
+      name, totaltime, rank, 
+      description)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{updateId,jdbcType=CHAR}, 
+      #{name,jdbcType=VARCHAR}, #{totaltime,jdbcType=TIME}, #{rank,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.TimeRankInfo" >
+    insert into time_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="totaltime != null" >
+        totaltime,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totaltime != null" >
+        #{totaltime,jdbcType=TIME},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.TimeRankInfo" >
+    update time_rank
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="totaltime != null" >
+        totaltime = #{totaltime,jdbcType=TIME},
+      </if>
+      <if test="rank != null" >
+        rank = #{rank,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.TimeRankInfo" >
+    update time_rank
+    set userid = #{userid,jdbcType=VARCHAR},
+      update_id = #{updateId,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      totaltime = #{totaltime,jdbcType=TIME},
+      rank = #{rank,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

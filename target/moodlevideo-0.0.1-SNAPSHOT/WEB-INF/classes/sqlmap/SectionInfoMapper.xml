@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.SectionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.SectionInfo" >
+    <id column="sectionid" property="sectionid" jdbcType="VARCHAR" />
+    <result column="lessonid" property="lessonid" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="CHAR" />
+    <result column="endtime" property="endtime" jdbcType="CHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sectionid, lessonid, starttime, endtime, description, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from section
+    where sectionid = #{sectionid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from section
+    where sectionid = #{sectionid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.SectionInfo" >
+    insert into section (sectionid, lessonid, starttime, 
+      endtime, description, url
+      )
+    values (#{sectionid,jdbcType=VARCHAR}, #{lessonid,jdbcType=INTEGER}, #{starttime,jdbcType=CHAR}, 
+      #{endtime,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.SectionInfo" >
+    insert into section
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sectionid != null" >
+        sectionid,
+      </if>
+      <if test="lessonid != null" >
+        lessonid,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sectionid != null" >
+        #{sectionid,jdbcType=VARCHAR},
+      </if>
+      <if test="lessonid != null" >
+        #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=CHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.SectionInfo" >
+    update section
+    <set >
+      <if test="lessonid != null" >
+        lessonid = #{lessonid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=CHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sectionid = #{sectionid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.SectionInfo" >
+    update section
+    set lessonid = #{lessonid,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=CHAR},
+      endtime = #{endtime,jdbcType=CHAR},
+      description = #{description,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR}
+    where sectionid = #{sectionid,jdbcType=VARCHAR}
+  </update>
+</mapper>

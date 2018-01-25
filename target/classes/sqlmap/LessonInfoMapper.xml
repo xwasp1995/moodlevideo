@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.LessonInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.LessonInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="courseid" property="courseid" jdbcType="INTEGER" />
+    <result column="chapter" property="chapter" jdbcType="TINYINT" />
+    <result column="section" property="section" jdbcType="TINYINT" />
+    <result column="videotime" property="videotime" jdbcType="CHAR" />
+    <result column="style" property="style" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="difficulty" property="difficulty" jdbcType="TINYINT" />
+    <result column="teacherid" property="teacherid" jdbcType="INTEGER" />
+    <result column="accuracy" property="accuracy" jdbcType="TINYINT" />
+    <result column="gesture" property="gesture" jdbcType="VARCHAR" />
+    <result column="blackboard_writing" property="blackboardWriting" jdbcType="VARCHAR" />
+    <result column="guidance" property="guidance" jdbcType="VARCHAR" />
+    <result column="example" property="example" jdbcType="VARCHAR" />
+    <result column="macroscopic_view" property="macroscopicView" jdbcType="VARCHAR" />
+    <result column="microcosmic_view" property="microcosmicView" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="speed" property="speed" jdbcType="TINYINT" />
+    <result column="noise" property="noise" jdbcType="TINYINT" />
+    <result column="joke" property="joke" jdbcType="TINYINT" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, courseid, chapter, section, videotime, style, subject, keyword, difficulty, teacherid, 
+    accuracy, gesture, blackboard_writing, guidance, example, macroscopic_view, microcosmic_view, 
+    note, speed, noise, joke, url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lesson
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lesson
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.LessonInfo" >
+    insert into lesson (id, courseid, chapter, 
+      section, videotime, style, 
+      subject, keyword, difficulty, 
+      teacherid, accuracy, gesture, 
+      blackboard_writing, guidance, example, 
+      macroscopic_view, microcosmic_view, note, 
+      speed, noise, joke, 
+      url)
+    values (#{id,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{chapter,jdbcType=TINYINT}, 
+      #{section,jdbcType=TINYINT}, #{videotime,jdbcType=CHAR}, #{style,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{difficulty,jdbcType=TINYINT}, 
+      #{teacherid,jdbcType=INTEGER}, #{accuracy,jdbcType=TINYINT}, #{gesture,jdbcType=VARCHAR}, 
+      #{blackboardWriting,jdbcType=VARCHAR}, #{guidance,jdbcType=VARCHAR}, #{example,jdbcType=VARCHAR}, 
+      #{macroscopicView,jdbcType=VARCHAR}, #{microcosmicView,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{speed,jdbcType=TINYINT}, #{noise,jdbcType=TINYINT}, #{joke,jdbcType=TINYINT}, 
+      #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.LessonInfo" >
+    insert into lesson
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="courseid != null" >
+        courseid,
+      </if>
+      <if test="chapter != null" >
+        chapter,
+      </if>
+      <if test="section != null" >
+        section,
+      </if>
+      <if test="videotime != null" >
+        videotime,
+      </if>
+      <if test="style != null" >
+        style,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="difficulty != null" >
+        difficulty,
+      </if>
+      <if test="teacherid != null" >
+        teacherid,
+      </if>
+      <if test="accuracy != null" >
+        accuracy,
+      </if>
+      <if test="gesture != null" >
+        gesture,
+      </if>
+      <if test="blackboardWriting != null" >
+        blackboard_writing,
+      </if>
+      <if test="guidance != null" >
+        guidance,
+      </if>
+      <if test="example != null" >
+        example,
+      </if>
+      <if test="macroscopicView != null" >
+        macroscopic_view,
+      </if>
+      <if test="microcosmicView != null" >
+        microcosmic_view,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="speed != null" >
+        speed,
+      </if>
+      <if test="noise != null" >
+        noise,
+      </if>
+      <if test="joke != null" >
+        joke,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null" >
+        #{chapter,jdbcType=TINYINT},
+      </if>
+      <if test="section != null" >
+        #{section,jdbcType=TINYINT},
+      </if>
+      <if test="videotime != null" >
+        #{videotime,jdbcType=CHAR},
+      </if>
+      <if test="style != null" >
+        #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        #{difficulty,jdbcType=TINYINT},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="accuracy != null" >
+        #{accuracy,jdbcType=TINYINT},
+      </if>
+      <if test="gesture != null" >
+        #{gesture,jdbcType=VARCHAR},
+      </if>
+      <if test="blackboardWriting != null" >
+        #{blackboardWriting,jdbcType=VARCHAR},
+      </if>
+      <if test="guidance != null" >
+        #{guidance,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null" >
+        #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="macroscopicView != null" >
+        #{macroscopicView,jdbcType=VARCHAR},
+      </if>
+      <if test="microcosmicView != null" >
+        #{microcosmicView,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        #{speed,jdbcType=TINYINT},
+      </if>
+      <if test="noise != null" >
+        #{noise,jdbcType=TINYINT},
+      </if>
+      <if test="joke != null" >
+        #{joke,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.LessonInfo" >
+    update lesson
+    <set >
+      <if test="courseid != null" >
+        courseid = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null" >
+        chapter = #{chapter,jdbcType=TINYINT},
+      </if>
+      <if test="section != null" >
+        section = #{section,jdbcType=TINYINT},
+      </if>
+      <if test="videotime != null" >
+        videotime = #{videotime,jdbcType=CHAR},
+      </if>
+      <if test="style != null" >
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="difficulty != null" >
+        difficulty = #{difficulty,jdbcType=TINYINT},
+      </if>
+      <if test="teacherid != null" >
+        teacherid = #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="accuracy != null" >
+        accuracy = #{accuracy,jdbcType=TINYINT},
+      </if>
+      <if test="gesture != null" >
+        gesture = #{gesture,jdbcType=VARCHAR},
+      </if>
+      <if test="blackboardWriting != null" >
+        blackboard_writing = #{blackboardWriting,jdbcType=VARCHAR},
+      </if>
+      <if test="guidance != null" >
+        guidance = #{guidance,jdbcType=VARCHAR},
+      </if>
+      <if test="example != null" >
+        example = #{example,jdbcType=VARCHAR},
+      </if>
+      <if test="macroscopicView != null" >
+        macroscopic_view = #{macroscopicView,jdbcType=VARCHAR},
+      </if>
+      <if test="microcosmicView != null" >
+        microcosmic_view = #{microcosmicView,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null" >
+        speed = #{speed,jdbcType=TINYINT},
+      </if>
+      <if test="noise != null" >
+        noise = #{noise,jdbcType=TINYINT},
+      </if>
+      <if test="joke != null" >
+        joke = #{joke,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.LessonInfo" >
+    update lesson
+    set courseid = #{courseid,jdbcType=INTEGER},
+      chapter = #{chapter,jdbcType=TINYINT},
+      section = #{section,jdbcType=TINYINT},
+      videotime = #{videotime,jdbcType=CHAR},
+      style = #{style,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=TINYINT},
+      teacherid = #{teacherid,jdbcType=INTEGER},
+      accuracy = #{accuracy,jdbcType=TINYINT},
+      gesture = #{gesture,jdbcType=VARCHAR},
+      blackboard_writing = #{blackboardWriting,jdbcType=VARCHAR},
+      guidance = #{guidance,jdbcType=VARCHAR},
+      example = #{example,jdbcType=VARCHAR},
+      macroscopic_view = #{macroscopicView,jdbcType=VARCHAR},
+      microcosmic_view = #{microcosmicView,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=TINYINT},
+      noise = #{noise,jdbcType=TINYINT},
+      joke = #{joke,jdbcType=TINYINT},
+      url = #{url,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

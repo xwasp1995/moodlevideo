@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ss="http://www.springframework.org/schema/security"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+   	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+   	http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.0.xsd
+   	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+   	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+   	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd"
+	profile="prod,dev,rc">
+	
+	<bean id="sqlSessionFactory_MoodleVideo" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-conf.xml" />
+		<property name="mapperLocations" value="classpath*:sqlmap/*.xml"></property>
+	</bean>
+	
+	<!-- 配置生成的mapper文件 -->
+	<bean id="courseInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.CourseInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="lessonInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.LessonInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="sectionInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.SectionInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="teacherInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.TeacherInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="studentInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.StudentInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="starRatingInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.StarRatingInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="behaviorInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.BehaviorInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="timeRankIndexInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.TimeRankIndexInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="timeRankInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.TimeRankInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="recommendVideoIndexInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.RecommendVideoIndexInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	<bean id="recommendVideoInfoMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface"
+			value="com.moodlevideo.server.dal.mapper.RecommendVideoInfoMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_MoodleVideo" />
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.BehaviorInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.BehaviorInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="sectionid" property="sectionid" jdbcType="VARCHAR" />
+    <result column="behave" property="behave" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="CHAR" />
+    <result column="endtime" property="endtime" jdbcType="CHAR" />
+    <result column="duration" property="duration" jdbcType="CHAR" />
+    <result column="happentime" property="happentime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, sectionid, behave, starttime, endtime, duration, happentime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from behavior
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from behavior
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.BehaviorInfo" >
+    insert into behavior (id, userid, sectionid, 
+      behave, starttime, endtime, 
+      duration, happentime)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{sectionid,jdbcType=VARCHAR}, 
+      #{behave,jdbcType=INTEGER}, #{starttime,jdbcType=CHAR}, #{endtime,jdbcType=CHAR}, 
+      #{duration,jdbcType=CHAR}, #{happentime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.BehaviorInfo" >
+    insert into behavior
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="sectionid != null" >
+        sectionid,
+      </if>
+      <if test="behave != null" >
+        behave,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="happentime != null" >
+        happentime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionid != null" >
+        #{sectionid,jdbcType=VARCHAR},
+      </if>
+      <if test="behave != null" >
+        #{behave,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=CHAR},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=CHAR},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=CHAR},
+      </if>
+      <if test="happentime != null" >
+        #{happentime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.BehaviorInfo" >
+    update behavior
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionid != null" >
+        sectionid = #{sectionid,jdbcType=VARCHAR},
+      </if>
+      <if test="behave != null" >
+        behave = #{behave,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=CHAR},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=CHAR},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=CHAR},
+      </if>
+      <if test="happentime != null" >
+        happentime = #{happentime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.BehaviorInfo" >
+    update behavior
+    set userid = #{userid,jdbcType=VARCHAR},
+      sectionid = #{sectionid,jdbcType=VARCHAR},
+      behave = #{behave,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=CHAR},
+      endtime = #{endtime,jdbcType=CHAR},
+      duration = #{duration,jdbcType=CHAR},
+      happentime = #{happentime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

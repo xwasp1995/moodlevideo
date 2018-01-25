@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.moodlevideo.server.dal.mapper.RecommendVideoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.moodlevideo.server.dal.model.RecommendVideoInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="update_id" property="updateId" jdbcType="CHAR" />
+    <result column="video_id" property="videoId" jdbcType="VARCHAR" />
+    <result column="video_description" property="videoDescription" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userid, update_id, video_id, video_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from recommend_video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUseridAndUpdateid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from recommend_video
+    where update_id = #{updateId,jdbcType=CHAR} and userid = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from recommend_video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.moodlevideo.server.dal.model.RecommendVideoInfo" >
+    insert into recommend_video (id, userid, update_id, 
+      video_id, video_description)
+    values (#{id,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR}, #{updateId,jdbcType=CHAR}, 
+      #{videoId,jdbcType=VARCHAR}, #{videoDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.moodlevideo.server.dal.model.RecommendVideoInfo" >
+    insert into recommend_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="videoId != null" >
+        video_id,
+      </if>
+      <if test="videoDescription != null" >
+        video_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="videoId != null" >
+        #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescription != null" >
+        #{videoDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.moodlevideo.server.dal.model.RecommendVideoInfo" >
+    update recommend_video
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=CHAR},
+      </if>
+      <if test="videoId != null" >
+        video_id = #{videoId,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescription != null" >
+        video_description = #{videoDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.moodlevideo.server.dal.model.RecommendVideoInfo" >
+    update recommend_video
+    set userid = #{userid,jdbcType=VARCHAR},
+      update_id = #{updateId,jdbcType=CHAR},
+      video_id = #{videoId,jdbcType=VARCHAR},
+      video_description = #{videoDescription,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
