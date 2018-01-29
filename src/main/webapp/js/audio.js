@@ -4,64 +4,54 @@
 
   var audio_context;
   var recorder;
-
+  var flag_watching = 0;
+  
   function startUserMedia(stream) {
     var input = audio_context.createMediaStreamSource(stream);
     __log('Media stream created.');
-
-    // Uncomment if you want the audio to feedback directly
-    //input.connect(audio_context.destination);
-    //__log('Input connected to audio context destination.');
     
     recorder = new Recorder(input);
     document.getElementById('play').onclick=startRecording;
+    var int=self.setInterval("clock()",5*60000);
+    
 
     __log('Recorder initialised.');
   }
+  
+  function clock(){
+	if(flag_watching == 0){return;}
+	recorder && recorder.record();
+	setTimeout(saveAndStop(),5000);
+  }
+  
+  function saveAndStop(){
+	  recorder && recorder.stop();
+	  saveFile();
+	  recorder.clear();
+  }
 
   function startRecording(button) {
+	flag_watching = 1;
     recorder && recorder.record();
     document.getElementById('play').onclick=stopRecording;
     __log('Recording...');
+    
   }
 
   function stopRecording(button) {
+	flag_watching = 0;
     recorder && recorder.stop();
-/*     button.disabled = true;
-    button.previousElementSibling.disabled = false; */
     __log('Stopped recording.');
-    
-    // create WAV download link using audio data blob
-    //createDownloadLink();
-    //alert("正在发送！");
+
     saveFile();
     document.getElementById('play').onclick=startRecording;
     
     recorder.clear();
   }
 
-  function createDownloadLink() {
-    recorder && recorder.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
-      var li = document.createElement('li');
-      var au = document.createElement('audio');
-      var hf = document.createElement('a');
-      
-      au.controls = true;
-      au.src = url;
-      hf.href = url;
-      hf.download = new Date().toISOString() + '.wav';
-      hf.innerHTML = hf.download;
-      li.appendChild(au);
-      li.appendChild(hf);
-      recordingslist.appendChild(li);
-    });
-  }
-
   function saveFile() {
   //alert("正在发送！");
     recorder && recorder.exportWAV(function(blob) {
-      
       //wav2mp3(blob, send(blob));
       send(blob);
       
@@ -69,24 +59,31 @@
   }
   
   function send(blob) {
-      	//alert("正在发送");
-        var xhr = new XMLHttpRequest(),
-            fd = new FormData();
+    	alert("正在发送");
+      var xhr = new XMLHttpRequest(),
+          fd = new FormData();
 
-        fd.append( 'file', blob);
-        /* xhr.onreadystatechange = function(){
+      //fd.append( 'file', blob, Date.now()+"_"+${login_username}+"_"+${video_sectionid});
+      fd.append( 'file', blob);
+      fd.append( 'name', Date.now());
+      fd.append( 'time', Date.now());
+      //fd.append( 'username', ${login_username});
+      //fd.append( 'videoid', ${video_sectionid});
+      
+      
+      xhr.onreadystatechange = function(){
 
-        var b = xhr.responseText;  
+      var b = xhr.responseText;  
 
-        if(xhr.readyState == 4 && xhr.status == 200){    
-            alert(b);
-        }
+      if(xhr.readyState == 4 && xhr.status == 200){    
+          alert(b);
+      }
 
-      	} */
-        xhr.open('POST', "http://101.201.68.238/soundRecord/demo/file_upload/upload1.php");
-        xhr.send( fd );
-        //alert("发送成功")
-  }
+    	} 
+      xhr.open('POST', "http://101.201.68.238/soundRecord/demo/file_upload/upload1.php");
+      xhr.send( fd );
+      //alert("发送成功")
+	  } 
 
   window.onload = function init() {
     try {
