@@ -264,18 +264,18 @@
       fd = new FormData();
       fd.append( 'file', blob);
       
-      fd.append( 'filename', "testname.wav");
+/*       fd.append( 'filename', "testname.wav");
       fd.append( 'userid', 1600022704);
       fd.append( 'sectionid', "testsectionid");
       fd.append( 'videotime_finish', "17:77");
-      fd.append( 'videotime_duration', audio_duration_eachtime/1000); 
+      fd.append( 'videotime_duration', audio_duration_eachtime/1000);  */
       
 
-/*       fd.append( 'filename', cookie_userid+"_"+cookie_sectionid+"_"+getNowVideoTime()+"_t.wav");
+      fd.append( 'filename', cookie_userid+"_"+cookie_sectionid+"_"+getNowVideoTime()+"_t.wav");
       fd.append( 'userid', cookie_userid);
       fd.append( 'sectionid', cookie_sectionid);
       fd.append( 'videotime_finish', getNowVideoTime());
-      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second */
+      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second 
       
 /*       xhr.onreadystatechange = function(){
 
