@@ -27,7 +27,7 @@
 
         <script src="/moodlevideo/js/star-rating.js" type="text/javascript"></script>
 
-	<script src="/moodlevideo/js/recorder.js"></script>
+	<script src="/moodlevideo/js/recorder1.js"></script>
 <!--  you can use recorder1.js or recorder2.js for half size of wav and recorder3.js for 1/4 size of wav file  -->
 
         <script src="/moodlevideo/js/wav2mp3.js"></script>
@@ -88,7 +88,9 @@
 		            <div class="pure-u-1">
 		                <div class="player">
 		                    <video  id="player" width="100%">
-		                        <source src="http://software-moodle.oss-cn-qingdao.aliyuncs.com/moodle_vedio/${video_url}.mp4" type="video/mp4"></source>		                        
+		                        <%-- <source src="http://software-moodle.oss-cn-qingdao.aliyuncs.com/moodle_vedio/${video_url}.mp4" type="video/mp4"></source>	 --%>	                        
+		                    	<source src="http://software-moodle.oss-cn-qingdao.aliyuncs.com/moodle_vedio/beidawlf_05_02.mp4" type="video/mp4"></source>	
+		              
 		                    </video>
 		
 		                    <div class="pure-g" id="controller">
@@ -262,19 +264,20 @@
       fd = new FormData();
       fd.append( 'file', blob);
       
+      var date = new Date();
       
-/*        fd.append( 'filename', getNowVideoTime()+"testname.wav");
-      fd.append( 'userid', 1600022704);
-      fd.append( 'sectionid', "testsectionid");
+      //fd.append( 'filename', date+".wav");
+      //fd.append( 'userid', 1600022704);
+      //fd.append( 'sectionid', "testsectionid");
       //fd.append( 'videotime_finish', "17:77");
-      //fd.append( 'videotime_duration', audio_duration_eachtime/1000); */   
+      //fd.append( 'videotime_duration', audio_duration_eachtime/1000);   
       
 
-      fd.append( 'filename', ${login_userid}+"_"+${video_sectionid}+"_"+getNowVideoTime()+"_t.wav");
+      fd.append( 'filename', ${login_userid}+"_"+${video_sectionid}+"_"+getNowVideoTime()+".wav");
       fd.append( 'userid', ${login_userid});
       fd.append( 'sectionid', ${video_sectionid});
       fd.append( 'videotime_finish', getNowVideoTime());
-      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second  
+      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second 
       
 /*       xhr.onreadystatechange = function(){
 
