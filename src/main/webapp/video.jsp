@@ -28,7 +28,7 @@
         <script src="/moodlevideo/js/star-rating.js" type="text/javascript"></script>
 
 	<script src="/moodlevideo/js/recorder.js"></script>
-//you can use recorder1.js or recorder2.js for half size of wav and recorder3.js for 1/4 size of wav file
+<!--  you can use recorder1.js or recorder2.js for half size of wav and recorder3.js for 1/4 size of wav file  -->
 
         <script src="/moodlevideo/js/wav2mp3.js"></script>
         
@@ -119,7 +119,9 @@
 	          		<div class="pure-u-1">
 	            	<input type="file" id="file">
 	            	<input id="temp_userid" type="hidden" value="${login_userid}">
-	            	<input id="temp_sectionid" type="hidden" value="${video_sectionid}">
+	            	<%String sectionid = request.getParameter("sectionid");   %>>
+	            	<input id="temp_sectionid" type="hidden" value="<%=sectionid %>>">
+	            	<%-- <input id="temp_sectionid" type="hidden" value="${video_sectionid}"> --%>
 	            	</div>
 	        	</div>
 			</div>
@@ -203,54 +205,49 @@
   }
 
   var audio_context;
+  var input;
   var recorder;
-  var flag_watching = 0;
-  var audio_duration_eachtime = 60000;
+  var flag_watching = 0;//用户是否在看视频
+  var audio_duration_eachtime = 59000;//每次录音长度
   
   function startUserMedia(stream) {
-    var input = audio_context.createMediaStreamSource(stream);
+    input = audio_context.createMediaStreamSource(stream);
     __log('Media stream created.');
-    
     recorder = new Recorder(input);
+    
     document.getElementById('play').onclick=startRecording;
     
-    var int=self.setInterval("clock()",5*60000);
+    self.setInterval("clock()",5*60000);//多久录一次
+    window.setTimeout("clock()",20000);
 
     __log('Recorder initialised.');
   }
   
+  //定时执行
   function clock(){
 	if(flag_watching == 0){return;}
+	//alert("开始录音");
 	recorder && recorder.record();
-	setTimeout(saveAndStop(),audio_duration_eachtime);
-  }
-  
-  function saveAndStop(){
+	window.setTimeout(function(){
+	  //alert("停止录音");
 	  recorder && recorder.stop();
 	  saveFile();
 	  recorder.clear();
+		},audio_duration_eachtime);
   }
 
   function startRecording(button) {
 	flag_watching = 1;
-    recorder && recorder.record();
-    document.getElementById('play').onclick=stopRecording;
-    __log('Recording...');
+	document.getElementById('play').onclick=stopRecording;
   }
 
   function stopRecording(button) {
 	flag_watching = 0;
-    recorder && recorder.stop();
-    __log('Stopped recording.');
-
-    saveFile();
     document.getElementById('play').onclick=startRecording;
-    
-    recorder.clear();
+
   }
 
   function saveFile() {
-  //alert("正在发送！");
     recorder && recorder.exportWAV(function(blob) {
       //wav2mp3(blob, send(blob));
       send(blob);
@@ -258,24 +255,26 @@
     });
   }
   
+  //发送音频
   function send(blob) {
       //alert("正在发送");
       var xhr = new XMLHttpRequest(),
       fd = new FormData();
       fd.append( 'file', blob);
       
-/*       fd.append( 'filename', "testname.wav");
+      
+/*        fd.append( 'filename', getNowVideoTime()+"testname.wav");
       fd.append( 'userid', 1600022704);
       fd.append( 'sectionid', "testsectionid");
-      fd.append( 'videotime_finish', "17:77");
-      fd.append( 'videotime_duration', audio_duration_eachtime/1000);  */
+      //fd.append( 'videotime_finish', "17:77");
+      //fd.append( 'videotime_duration', audio_duration_eachtime/1000); */   
       
 
-      fd.append( 'filename', cookie_userid+"_"+cookie_sectionid+"_"+getNowVideoTime()+"_t.wav");
-      fd.append( 'userid', cookie_userid);
-      fd.append( 'sectionid', cookie_sectionid);
+      fd.append( 'filename', ${login_userid}+"_"+${video_sectionid}+"_"+getNowVideoTime()+"_t.wav");
+      fd.append( 'userid', ${login_userid});
+      fd.append( 'sectionid', ${video_sectionid});
       fd.append( 'videotime_finish', getNowVideoTime());
-      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second 
+      fd.append( 'videotime_duration', audio_duration_eachtime/1000); //second  
       
 /*       xhr.onreadystatechange = function(){
 
